@@ -1,12 +1,13 @@
-const Admin = require("../models/User");
-const bcrypt = require("bcryptjs");
-
+import bcrypt from "bcryptjs";
+import Admin from "../models/User.js";
 const InsertAdminDetailsInDB = async () => {
   const adminEmail = process.env.ADMIN_EMAIL;
   const adminPassword = process.env.ADMIN_PASSWORD;
 
-  const ifAdminExist = await Admin.findOne({ email: adminEmail });
-//   If not exist , create new admin
+  const ifAdminExist = await Admin.findOne({
+    email: adminEmail
+  });
+  //   If not exist , create new admin
   if (!ifAdminExist) {
     const salt = bcrypt.genSaltSync(10);
     const hachedPaasword = await bcrypt.hash(adminPassword, salt);
@@ -22,4 +23,4 @@ const InsertAdminDetailsInDB = async () => {
 };
 
 InsertAdminDetailsInDB();
-module.exports = InsertAdminDetailsInDB;
+export default InsertAdminDetailsInDB;

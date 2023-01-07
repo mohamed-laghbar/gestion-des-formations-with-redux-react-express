@@ -1,15 +1,11 @@
-const bcrypt = require('bcryptjs');
-const Employer = require('../models/User');
-const refreshToken = require('../utils/refreshToken');
-const accesToken = require('../utils/accesToken')
+import bcrypt from 'bcryptjs'
 
-const Login = async (req, res, next) => {
+const login = async (req, res, next) => {
 
-  
+
 
 }
 
 
 
-
-module.exports =  Login
+export default login
