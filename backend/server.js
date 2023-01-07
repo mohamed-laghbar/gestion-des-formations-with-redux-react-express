@@ -16,6 +16,9 @@ app.use(express.urlencoded({
 }));
 
 app.use("/api/auth",authRoute );
+
+
+
 app.use(ErrorHandler)
 
 const port = process.env.PORT || 5000;
