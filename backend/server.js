@@ -8,7 +8,7 @@ import 'dotenv/config'
 
 
 import './config/db.js'
-import './config//initAdmin.js'
+// import './config//initAdmin.js'
 import authRoute from  './routes/AuthRoutes.js'
 app.use(express.json());
 app.use(express.urlencoded({
