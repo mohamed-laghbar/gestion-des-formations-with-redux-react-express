@@ -10,7 +10,7 @@ const InsertAdminDetailsInDB = async () => {
   //   If not exist , create new admin
   if (!ifAdminExist) {
     const salt = bcrypt.genSaltSync(10);
-    const hachedPaasword = await bcrypt.hash(adminPassword, salt);
+    const hachedPaasword =  bcrypt.hash(adminPassword, salt);
 
     const newAdmin = new Admin({
       name: "Ilyas",

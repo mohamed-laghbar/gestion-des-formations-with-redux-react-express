@@ -18,8 +18,9 @@ const login = async (req, res, next) => {
 
         //    get the role of that user to generate token accordenly
         const { role } = req.user;
-        let token = generateToken(req.user);
-
+        console.log('above gen');
+        
+        console.log(Tokens);
         switch (role) {
             case "user":
                 await User.findByIdAndUpdate(user._id, {
@@ -56,6 +57,7 @@ const login = async (req, res, next) => {
                     success: true,
                     token: req.user.acces_token,
                     message: "Login successful",
+                    
                 });
 
                 break;
@@ -67,4 +69,10 @@ const login = async (req, res, next) => {
     }
 };
 
-export default login;
+ const privateRoute = (req, res,next)=>{
+
+res.json('this a private route'
+)
+}
+
+export  {login,privateRoute};

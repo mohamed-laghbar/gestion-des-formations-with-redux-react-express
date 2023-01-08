@@ -1,9 +1,9 @@
 import { Router } from 'express'
 const route = Router()
-import login from '../controllers/AuthController.js'
-
-route.post('/login',login)
-
+import { login, privateRoute } from '../controllers/AuthController.js'
+import { verifyAccesToken } from '../middlewares/Verification.js'
+route.post('/login', login)
+route.get('/private', privateRoute)
 
 
 

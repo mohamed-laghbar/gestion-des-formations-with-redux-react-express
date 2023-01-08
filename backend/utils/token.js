@@ -35,7 +35,6 @@ const generateToken = (user) => {
         admin_acces_token, 
         admin_refresh_token
     }
-    // console.log(Tokens.admin_acces_token);
 
     return Tokens;
 };
