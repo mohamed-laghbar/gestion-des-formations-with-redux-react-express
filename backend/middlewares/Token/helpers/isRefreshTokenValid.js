@@ -9,7 +9,7 @@ import refreshToken from "../../../utils/refreshToken.js";
 
 function isValidRefreshToken(token) {
     const secret = process.env.REFRESH_SECRET;
-
+    let valid = ''
     if (!token) throw new Error("Refesh token is required");
 
     try {
@@ -18,12 +18,13 @@ function isValidRefreshToken(token) {
             if (err) {
                 // refresh token is expired 
                 console.log('false');
-                return false;
+                 valid = 'false';
             }
             // refresh token is valid
             console.log('true');
-            return true;
+             valid = 'true'
         })
+        return valid;
     } catch (error) {
         throw new Error(error)
     }
@@ -39,11 +40,11 @@ async function newRefreshToken(id) {
     const user = await User.findOne({ _id: id });
     if (!user) throw new Error("No user Found");
 
-    user.refresh_Token = refreshToken(user);
-
+    const newRefreshToken = refreshToken(user);
+    user.refresh_Token = newRefreshToken;
     await user.save();
     return user;
 }
 
 
-export { isValidRefreshToken, newRefreshToken };
+export  {isValidRefreshToken, newRefreshToken};

@@ -70,7 +70,12 @@ const privateRoute = (req, res, next) => {
     success: true,
     token: req.token,
     user: req.user,
-    req: req.refresh_token
+    req: req.refresh_token,
+    token1: req.token1,
+    paylaod: req.paylaod,
+    paylaod1: req.paylaod1,
+    decode: req.decode
+
   });
   next()
 };
