@@ -5,11 +5,11 @@ function accesToken(user) {
     {
       id: user._id,
       email: user.email,
-      role:user.role,
+      role: user.role,
     },
     process.env.JWT_SECRET || "",
     {
-      expiresIn: "1d",
+      expiresIn: "1s",
     }
   );
   return acces_token;

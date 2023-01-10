@@ -1,5 +1,5 @@
 import express from "express";
-import ErrorHandler from "./middlewares/ErrorHandler.js";
+import ErrorHandler from "./middlewares/Error/ErrorHandler.js";
 const app = express();
 import "dotenv/config";
 import cookieParser from "cookie-parser";
