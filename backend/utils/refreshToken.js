@@ -5,10 +5,11 @@ function refreshToken(user) {
     {
       id: user._id,
       email: user.email,
+      role: user.role,
     },
     process.env.REFRESH_SECRET || "",
     {
-      expiresIn: "1d",
+      expiresIn: "10d",
     }
   );
   return refresh_token;

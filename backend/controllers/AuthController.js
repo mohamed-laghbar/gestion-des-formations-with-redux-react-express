@@ -26,7 +26,7 @@ const login = async (req, res, next) => {
         await User.findByIdAndUpdate(user._id, {
           refresh_Token: refresh_token,
         });
-        await res.cookie("refresh_token", refresh_token, {
+         res.cookie("refresh_token", refresh_token, {
           httpOnly: true,
           maxAge: 7 * 24 * 60 * 60,
           sameSite: "none",
@@ -69,9 +69,9 @@ const privateRoute = (req, res, next) => {
   res.status(200).json({
     success: true,
     token: req.token,
-    user: req.user
+    user: req.user,
   });
-
+next()
 };
 
 export { login, privateRoute };
