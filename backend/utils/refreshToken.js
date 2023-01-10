@@ -9,7 +9,7 @@ function refreshToken(user) {
     },
     process.env.REFRESH_SECRET || "",
     {
-      expiresIn: "1d",
+      expiresIn: "1s",
     }
   );
   return refresh_token;
