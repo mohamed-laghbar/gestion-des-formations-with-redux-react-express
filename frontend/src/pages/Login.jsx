@@ -1,35 +1,40 @@
-import React, { useState } from "react";
-import axios from "axios";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import React, { useState } from "react";
+import axios from "axios";
+import { Link ,Navigate} from "react-router-dom";
+const { ValidateEmail, validatePassword } = require("../utils/validation");
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errEmail, setEmailErr] = useState("");
+  const [errPassword, setPasswordErr] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const option = {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
+
+    if (!ValidateEmail(email)) {
+      return setEmailErr("Invalid email format!");
+    } else setEmailErr("");
+
+    if (!validatePassword(password)) {
+      return setPasswordErr("Password must be more then 6 caracteres");
+    } else setPasswordErr("");
 
     try {
       const { data } = await axios.post(
         "http://localhost:1337/api/auth/login",
+        JSON.stringify({ email, password }),
         {
-          email: email,
-          password: password,
-        },
-        option
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
-      toast.warn(data.message, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      // login true
     } catch (error) {
-      toast.warn(error.response.data.message, {
+      toast.error(error.response.data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }
@@ -44,6 +49,17 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <div>
+              {errEmail ? (
+                <div
+                  className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                  role="alert"
+                >
+                  {" "}
+                  {errEmail}
+                </div>
+              ) : (
+                ""
+              )}
               <label className="block" htmlFor="email">
                 Email{" "}
                 <label>
@@ -54,6 +70,17 @@ const Login = () => {
                     placeholder="Email"
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                   />
+                  {errPassword ? (
+                    <div
+                      className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                      role="alert"
+                    >
+                      {" "}
+                      {errPassword}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </label>{" "}
               </label>{" "}
             </div>{" "}
