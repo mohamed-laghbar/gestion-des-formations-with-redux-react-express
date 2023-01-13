@@ -18,7 +18,7 @@ async function sendResetPasswordEmail(name, email, token) {
       subject: "Reset Password",
       html: `<h1>Hello ${name}</h1>
         <p>Please click on the link below to reset your password</p>
-        <a href="http://localhost:3000/resetPassword/${token}">Reset Password</a>`,
+        <a href="http://localhost:3000/setnewpassword/${token}">Reset Password</a>`,
     };
   
     await transport.sendMail(mailOptions);
