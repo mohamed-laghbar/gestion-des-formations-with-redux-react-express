@@ -4,6 +4,7 @@ import { login, privateRoute } from "../controllers/AuthController.js";
 import {verifyAccesToken} from "../middlewares/Token/verifyToken.js";
 
 
+
 route.post("/login", login);
 route.get("/private",verifyAccesToken, privateRoute);
 

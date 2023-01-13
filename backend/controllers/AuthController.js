@@ -6,6 +6,7 @@ import refreshToken from "../utils/refreshToken.js";
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+
     // check if the user exist
     const user = await User.findOne({
       email,
@@ -18,10 +19,9 @@ const login = async (req, res, next) => {
     if (!isMatch) return next(CreateError("Wrong Password", 400));
 
     //    get the role of that user to generate token accordenly
-    const role = user.role;
     const refresh_token = refreshToken(user);
     const acces_token = accesToken(user);
-    switch (role) {
+    switch (user.role) {
       case "user":
         await User.findByIdAndUpdate(user._id, {
           refresh_Token: refresh_token,
@@ -70,9 +70,8 @@ const privateRoute = (req, res, next) => {
     success: true,
     token: req.token,
     user: req.user,
-    
   });
-  next()
+  next();
 };
 
 export { login, privateRoute };

@@ -38,7 +38,7 @@ async function isValidRefreshToken(token) {
         _id: id,
       });
       const newAccesToken = accesToken(user);
-       payload = jwt_decode(newAccesToken);
+      payload = jwt_decode(newAccesToken);
 
       console.log("acces token expired but the refresh token is valid");
       const data = {

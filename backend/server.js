@@ -3,17 +3,15 @@ import ErrorHandler from "./middlewares/Error/ErrorHandler.js";
 const app = express();
 import "dotenv/config";
 import cookieParser from "cookie-parser";
-import { Configuration, OpenAIApi } from "openai";
+import cors from "cors";
 
 import "./config/db.js";
 import authRoute from "./routes/AuthRoutes.js";
+
+app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
+
 
 app.use("/api/auth", authRoute);
 
