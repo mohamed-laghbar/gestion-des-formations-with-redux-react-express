@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import React, { useState } from "react";
 import axios from "axios";
-import { Link ,Navigate} from "react-router-dom";
 const { ValidateEmail, validatePassword } = require("../utils/validation");
 
 const Login = () => {
@@ -20,7 +19,7 @@ const Login = () => {
     } else setEmailErr("");
 
     if (!validatePassword(password)) {
-      return setPasswordErr("Password must be more then 6 caracteres");
+      return setPasswordErr("Password must be more then 2 caracteres");
     } else setPasswordErr("");
 
     try {
@@ -46,14 +45,12 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
-        <h3 className="text-2xl font-bold text-center">
-          Login to your account{" "}
-        </h3>
-        <form onSubmit={handleSubmit}>
-          <div className="mt-4">
-            <div>
-              {errEmail ? (
+      <div className="bg-grey-lighter min-h-screen flex flex-col">
+        <div className="container max-w-sm 	 mx-auto flex-1 flex flex-col items-center justify-center px-2">
+          <div className="bg-white px-6 py-8 bg-amber-100	 rounded shadow-md text-black w-full">
+            <h1 className="mb-8 text-4xl font-bold	 text-center">Login</h1>
+            <form onSubmit={handleSubmit}>
+            {errEmail ? (
                 <div
                   className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                   role="alert"
@@ -64,52 +61,60 @@ const Login = () => {
               ) : (
                 ""
               )}
-              <label className="block" htmlFor="email">
-                Email{" "}
-                <label>
-                  <input
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    type="text"
-                    placeholder="Email"
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  />
+              <input
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
+                type="email"
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                name="email"
+                placeholder="Email"
+              />
                   {errPassword ? (
-                    <div
-                      className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-                      role="alert"
-                    >
-                      {" "}
-                      {errPassword}
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>{" "}
-              </label>{" "}
-            </div>{" "}
-            <div className="mt-4">
-              <label className="block">
-                Password{" "}
-                <label>
-                  <input
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    type="password"
-                    placeholder="Password"
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  />
-                </label>{" "}
-              </label>{" "}
-            </div>{" "}
-            <div className="flex items-baseline justify-between">
-              <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
-                Login{" "}
-              </button>{" "}
-            </div>{" "}
-          </div>{" "}
-        </form>{" "}
-      </div>{" "}
+                <div
+                  className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                  role="alert"
+                >
+                  {" "}
+                  {errPassword}
+                </div>
+              ) : (
+                ""
+              )}
+          
+              <input
+                onChange={(event) => setPassword(event.target.value)}
+                value={password}
+                type="password"
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                name="password"
+                placeholder="Password"
+              />
+          
+
+              <button
+                type="submit"
+                className="w-full text-center py-3 rounded bg-blue-900 text-white hover:bg-green-dark focus:outline-none my-1"
+              >
+                Login
+              </button>
+            </form>
+
+            <div className="text-center text-sm text-grey-dark mt-4">
+            
+        
+              Did you forget your password, Don't worry <br></br>
+              <a
+                className="no-underline font-medium	 border-b border-grey-dark text-blue-900"
+                href="/resetpassword"
+              >
+         
+                <span className="font-bold	"> Reset from here </span> 
+              </a>
+            </div>
+            <div className="text-center text-sm text-grey-dark mt-4"></div>
+          </div>
+        </div>
+      </div>
       <ToastContainer />
     </div>
   );
