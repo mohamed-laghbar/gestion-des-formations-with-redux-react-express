@@ -11,7 +11,7 @@ const login = async (req, res, next) => {
     const user = await User.findOne({
       email,
     });
-    if (!user) return next(CreateError("Invalid Email", 400));
+    if (!user) return next(CreateError("Wrong email ", 400));
 
     // const isMatch = bcrypt.compare(password, user.password);
     const isMatch = password === user.password;

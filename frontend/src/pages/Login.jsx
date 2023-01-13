@@ -33,6 +33,10 @@ const Login = () => {
         }
       );
       // login true
+      toast.success(data.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.log(data.message);
     } catch (error) {
       toast.error(error.response.data.message, {
         position: toast.POSITION.TOP_CENTER,
