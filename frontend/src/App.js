@@ -1,8 +1,8 @@
-import Login from "./pages/Login";
-import ResetPassword from "./pages/ResetPassword";
+import Login from "./pages/auth/Login";
+import ResetPassword from "./pages/auth/ResetPassword";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SetNewPassword from "./pages/SetNewPassword";
-import NotFound from './pages/NotFound'
+import SetNewPassword from "./pages/auth/SetNewPassword";
+import NotFound from './pages/auth/NotFound'
 
 
 function App() {

@@ -2,10 +2,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-const { ValidateEmail, validatePassword } = require("../utils/validation");
+import useAuth from "../../hooks/useAuth";
+const { ValidateEmail, validatePassword } = require("../../utils/validation");
 
 const Login = () => {
+  const navigate = useNavigate()
+  const { setAuth } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errEmail, setEmailErr] = useState("");
@@ -32,14 +37,21 @@ const Login = () => {
         }
       );
       // login true
-      toast.success(data.message, {
-        position: toast.POSITION.TOP_CENTER,
+     const role = data?.role;
+     const token = data?.token;
+     
+        setAuth({token})
+        navigate('/resetpassword')
+
+     console.log(role,token);
+     toast.success(data.message, {
+       position: toast.POSITION.TOP_CENTER,
       });
-      console.log(data.message);
     } catch (error) {
-      toast.error(error.response.data.message, {
+      toast.error(error?.response?.data?.message, {
         position: toast.POSITION.TOP_CENTER,
       });
+      console.log(error?.response?.data?.message);
     }
   };
 
@@ -47,10 +59,10 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-grey-lighter min-h-screen flex flex-col">
         <div className="container max-w-sm 	 mx-auto flex-1 flex flex-col items-center justify-center px-2">
-          <div className="bg-white px-6 py-8 bg-amber-100	 rounded shadow-md text-black w-full">
+          <div className="bg-white px-6 py-8 bg-.messageamber-100	 rounded shadow-md text-black w-full">
             <h1 className="mb-8 text-4xl font-bold	 text-center">Login</h1>
             <form onSubmit={handleSubmit}>
-            {errEmail ? (
+              {errEmail ? (
                 <div
                   className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                   role="alert"
@@ -69,7 +81,7 @@ const Login = () => {
                 name="email"
                 placeholder="Email"
               />
-                  {errPassword ? (
+              {errPassword ? (
                 <div
                   className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                   role="alert"
@@ -80,7 +92,7 @@ const Login = () => {
               ) : (
                 ""
               )}
-          
+
               <input
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
@@ -89,7 +101,6 @@ const Login = () => {
                 name="password"
                 placeholder="Password"
               />
-          
 
               <button
                 type="submit"
@@ -100,15 +111,12 @@ const Login = () => {
             </form>
 
             <div className="text-center text-sm text-grey-dark mt-4">
-            
-        
               Did you forget your password, Don't worry <br></br>
               <a
                 className="no-underline font-medium	 border-b border-grey-dark text-blue-900"
                 href="/resetpassword"
               >
-         
-                <span className="font-bold	"> Reset from here </span> 
+                <span className="font-bold	"> Reset from here </span>
               </a>
             </div>
             <div className="text-center text-sm text-grey-dark mt-4"></div>

@@ -28,7 +28,7 @@ function SetNewPassword() {
       toast.success(data.data);
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 1500);
     } catch (error) {
       toast.error(error.response.data.message, {
         position: toast.POSITION.TOP_CENTER,

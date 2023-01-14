@@ -16,8 +16,8 @@ const login = async (req, res, next) => {
     });
     if (!user) return next(CreateError("Wrong email ", 400));
 
-    const isMatch = bcrypt.compare(password, user.password);
-    // const isMatch = password === user.password;
+    // const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = password === user.password;
 
     if (!isMatch) return next(CreateError("Wrong Password", 400));
 
