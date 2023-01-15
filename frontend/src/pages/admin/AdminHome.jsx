@@ -1,11 +1,13 @@
-import React from 'react';
-import Sidebar from '../../components/SideBar';
+import React from "react";
+import Sidebar from "../../components/SideBar";
 const AdminHome = () => {
-    return (
-        <div>
-            <Sidebar/>
-        </div>
-    );
-}
+  return (
+    <div className="flex">
+      <Sidebar />
+      
+
+    </div>
+  );
+};
 
 export default AdminHome;

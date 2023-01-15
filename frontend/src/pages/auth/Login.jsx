@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-const { ValidateEmail, validatePassword } = require("../../utils/validation");
+import { ValidateEmail, validatePassword } from "../../utils/validation";
 
 const Login = () => {
   const navigate = useNavigate()

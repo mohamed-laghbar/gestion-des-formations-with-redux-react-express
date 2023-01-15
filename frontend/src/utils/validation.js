@@ -13,12 +13,7 @@ function ValidateEmail(mail) {
     return true;
   }
   
-  function validateName(name) {
-    const re = /^[a-zA-Z]+$/;
-    if (re.test(name)) {
-      return true;
-    } else return false;
-  }
+
   
-  module.exports = { ValidateEmail, validatePassword, validateName };
+  export { ValidateEmail, validatePassword };
   
