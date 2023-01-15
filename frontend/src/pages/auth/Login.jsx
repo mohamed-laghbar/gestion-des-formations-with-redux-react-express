@@ -2,7 +2,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 const { ValidateEmail, validatePassword } = require("../../utils/validation");
@@ -40,8 +40,12 @@ const Login = () => {
      const role = data?.role;
      const token = data?.token;
      
-        setAuth({token})
-        navigate('/resetpassword')
+        setAuth({token,role})
+        localStorage.setItem('role',role)
+        localStorage.setItem('token',token)
+
+        console.log(role);
+        navigate(`/${role}`)
 
      console.log(role,token);
      toast.success(data.message, {
