@@ -1,11 +1,11 @@
 import React from "react";
 import Sidebar from "../../components/SideBar";
-import Table from "../../components/Table";
+import Table from "../../components/EmployeesTable";
 const AdminHome = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <Table />
+      <Table  />
       
 
     </div>

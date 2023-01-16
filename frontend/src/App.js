@@ -11,6 +11,7 @@ import Unauthorized from "./pages/auth/Unauthorized";
 import Organisme from "./pages/admin/Organisme";
 import Formations from "./pages/admin/Formations";
 import Employees from "./pages/admin/Employees";
+import AddOrganisme from "./pages/admin/AddOrganisme";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/organismes" element={<Organisme />} />
         <Route path="/formations" element={<Formations />} />
         <Route path="/employees" element={<Employees />} />
+        <Route path="/addorgasnisme" element={<AddOrganisme />} />
         </Route>
 
         {/* User Routes */}
