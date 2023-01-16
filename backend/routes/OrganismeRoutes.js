@@ -3,5 +3,5 @@ import { addOrganisme, getAllOrganismes } from "../controllers/OrganismeControll
 const route = Router();
 
 route.post("/addorganisme", addOrganisme);
-route.get("/organismes",getAllOrganismes);
+route.get("/organismes", getAllOrganismes);
 export default route;

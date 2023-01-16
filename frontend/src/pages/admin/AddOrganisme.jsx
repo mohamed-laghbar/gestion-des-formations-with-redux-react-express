@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/SideBar";
 
 const AddOrganisme = () => {
@@ -8,22 +9,20 @@ const AddOrganisme = () => {
   const [ville, setVille] = useState("");
   const [domaine, setDomaine] = useState("");
 
-  const handleSubmit = () => {
-    axios
-      .post("http://localhost:1337/api/addorganisme", {
-        name,
-        address,
-        ville,
-        domaine,
-      })
-      .then(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    axios.post(
+      "http://localhost:1337/api/addorganisme",
+      JSON.stringify({ name, address, ville, domaine }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    navigate(-1);
   };
 
   return (

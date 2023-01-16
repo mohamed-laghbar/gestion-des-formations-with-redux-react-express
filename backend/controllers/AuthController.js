@@ -3,8 +3,8 @@ import User from "../models/User.js";
 import CreateError from "../utils/Error.js";
 import accesToken from "../utils/accesToken.js";
 import refreshToken from "../utils/refreshToken.js";
-import {sendResetPasswordEmail} from '../utils/Email.js';
-import jwt from 'jsonwebtoken';
+import { sendResetPasswordEmail } from "../utils/Email.js";
+import jwt from "jsonwebtoken";
 
 const login = async (req, res, next) => {
   try {
@@ -68,7 +68,7 @@ const login = async (req, res, next) => {
   }
 };
 
-const forgetPassword = async (req, res, next) => {  
+const forgetPassword = async (req, res, next) => {
   const email = req.body.email;
 
   const user = await User.findOne({ email });
@@ -87,14 +87,13 @@ const resetPassword = async (req, res, next) => {
     if (!user) return next(CreateError("Acces denied", 502));
 
     const _id = user.id;
-    const hachedPassword =await bcrypt.hash(password, 8);
+    const hachedPassword = await bcrypt.hash(password, 8);
     console.log(hachedPassword);
     await User.findByIdAndUpdate(_id, {
       password: hachedPassword,
     });
 
     return res.status(200).send("password changed");
-
   } catch (error) {
     next(error);
   }
