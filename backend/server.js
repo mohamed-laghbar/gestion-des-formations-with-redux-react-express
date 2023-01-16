@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 import "./config/db.js";
+import './config/initAdmin.js'
 import authRoute from "./routes/AuthRoutes.js";
 
 app.use(cors({ credentials:true, origin:'http://localhost:3000' }));

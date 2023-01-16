@@ -3,7 +3,6 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      // required: [true, "Please add your first name"],
       trim: true,
     },
 
@@ -16,7 +15,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Please add your password"],
-      minlength: 3,
       trim: true,
     },
     refresh_Token: {
