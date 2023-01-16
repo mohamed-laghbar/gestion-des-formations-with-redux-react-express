@@ -1,8 +1,10 @@
 import bcrypt from "bcryptjs";
 import Admin from "../models/User.js";
 const InsertAdminDetailsInDB = async () => {
+
   const adminEmail = process.env.ADMIN_EMAIL;
   const adminPassword = process.env.ADMIN_PASSWORD;
+  
   try {
     const ifAdminExist = await Admin.findOne({
       email: adminEmail,

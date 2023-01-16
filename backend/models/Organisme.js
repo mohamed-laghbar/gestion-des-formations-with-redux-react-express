@@ -6,14 +6,15 @@ const OrganismeSchema = new mongoose.Schema(
       trim: true,
     },
 
-    city: {
+    address: {
       type: String,
     },
-    address: {
-      type:String,
+    ville: {
+      type: String,
+      trim: true,
     },
-    domaine:{
-        type:String,
+    domaine: {
+      type: String,
     },
   },
   {
