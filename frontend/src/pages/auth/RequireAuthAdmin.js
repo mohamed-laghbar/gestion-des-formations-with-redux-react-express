@@ -12,8 +12,10 @@ const token = localStorage.getItem('token');
 
     return (
         role === 'admin'
-            ? <Outlet />
-                 :<Navigate to='/login' state={{from: location}} replace/>
+        ? <Outlet />
+            : token 
+                ? <Navigate to='/unauthorized' state={{from: location}} replace/>
+                    :<Navigate to='/login' state={{from: location}} replace/>
     );
 }
 
