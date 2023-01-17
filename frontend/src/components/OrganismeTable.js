@@ -2,15 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiPlusCircle } from "react-icons/bi";
+import Cookies from "js-cookie";
 
 export default function OrgansimeTable() {
   let [organisme, setOrganisme] = useState([]);
 
-  useEffect( () => {
+  useEffect(() => {
+    const refresh = Cookies.get("refresh_token");
     axios
-      .get("http://localhost:1337/api/organismes")
+      .get("http://localhost:1337/api/organismes", { headers: { refresh } })
       .then((res) => {
         setOrganisme(res.data);
+        console.log(refresh);
       })
       .catch((err) => {
         console.log(err.msg);
@@ -26,13 +29,14 @@ export default function OrgansimeTable() {
 
         <div className="p-1.5 w-full inline-block align-middle">
           <div className="overflow-hidden border rounded-lg">
-          <Link to="/addorgasnisme" className="sm-text mx-auto">
-                   
-                   <button className="bg-blue-500 flex hover:bg-blue-700 text-white font-bold p-3 m-8 rounded">
-                    <h2> Create new Organisme  </h2>                <div className="my-1 mx-3 "><BiPlusCircle /></div>    
-
-                   </button>
-                 </Link>
+            <Link to="/addorgasnisme" className="sm-text mx-auto">
+              <button className="bg-blue-500 flex hover:bg-blue-700 text-white font-bold p-3 m-8 rounded">
+                <h2> Create new Organisme </h2>{" "}
+                <div className="my-1 mx-3 ">
+                  <BiPlusCircle />
+                </div>
+              </button>
+            </Link>
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -68,20 +72,16 @@ export default function OrgansimeTable() {
                     <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                       {item.name}
                     </td>
-
                     <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                       {item.address}
                     </td>
-
                     <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                       {item.ville}
                     </td>
-
                     <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                       {item.domaine}
-                    </td>  <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                    </td>
-                 
+                    </td>{" "}
+                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"></td>
                   </tr>
                 ))}
               </tbody>

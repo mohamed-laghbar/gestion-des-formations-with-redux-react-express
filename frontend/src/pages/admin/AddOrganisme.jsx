@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/SideBar";
@@ -13,7 +14,7 @@ const AddOrganisme = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    Cookies.get('refresh_token')
     axios.post(
       "http://localhost:1337/api/addorganisme",
       JSON.stringify({ name, address, ville, domaine }),

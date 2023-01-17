@@ -5,8 +5,11 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   const logout = ()=>{
-    localStorage.clear()
-    navigate('/login')
+    setTimeout(()=>{
+      localStorage.clear()
+      navigate('/login')
+    },200)
+
   }
 
   return (
