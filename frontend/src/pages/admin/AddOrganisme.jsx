@@ -15,7 +15,8 @@ const AddOrganisme = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     Cookies.get('refresh_token')
-    axios.post(
+   const insert =async ()=>{
+   await axios.post(
       "http://localhost:1337/api/addorganisme",
       JSON.stringify({ name, address, ville, domaine }),
       {
@@ -23,6 +24,8 @@ const AddOrganisme = () => {
         withCredentials: true,
       }
     );
+   }
+   insert()
     navigate('/organismes');
   };
 

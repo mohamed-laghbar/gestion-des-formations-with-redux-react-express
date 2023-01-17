@@ -12,7 +12,7 @@ import Organisme from "./pages/admin/Organisme";
 import Formations from "./pages/admin/Formations";
 import Employees from "./pages/admin/Employees";
 import AddOrganisme from "./pages/admin/AddOrganisme";
-import P from "./pages/admin/p";
+import AddFormation from "./pages/admin/AddFormation";
 
 function App() {
   return (
@@ -29,14 +29,16 @@ function App() {
         <Route element={<ResetPassword />} path="/resetpassword" exact />
         <Route element={<Unauthorized />} path="/unauthorized" exact />
 
+        
+
         {/* { Admin Routes } */}
         <Route element={<RequireAuthAdmin />}>
-        <Route path="/admin" element={<AdminHome />} />
+        <Route path="/admin" element={<Formations />} />
         <Route path="/organismes" element={<Organisme />} />
         <Route path="/formations" element={<Formations />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/addorgasnisme" element={<AddOrganisme />} />
-        <Route path="/private" element={<P />} />
+        <Route path="/addformation" element={<AddFormation />} />
         </Route>
 
         {/* User Routes */}

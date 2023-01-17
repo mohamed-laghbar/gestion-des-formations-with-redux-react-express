@@ -8,13 +8,11 @@ const userSchema = new mongoose.Schema(
 
     email: {
       type: String,
-      required: [true, "Please add your email"],
       unique: true,
       trim: true,
     },
     password: {
       type: String,
-      required: [true, "Please add your password"],
       trim: true,
     },
     refresh_Token: {
@@ -24,7 +22,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
-    
+    organisme: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "organisme",
+    },
+    formation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "formation",
+    },
   },
   {
     timestamps: true,

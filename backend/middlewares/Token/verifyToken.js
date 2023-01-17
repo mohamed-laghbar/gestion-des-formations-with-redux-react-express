@@ -16,7 +16,7 @@ const verifyAccesToken = async (req, res, next) => {
   try {
     jwt.verify(token, secret || "", async (err, decode) => {
       if (err) {
-        const refresh_token = await req?.headers?.cookie?.split("=")[1];
+        const refresh_token = req.headers.cookie.split(",")[0];
         if (!refresh_token)
           return next(CreateError("Refresh token is required", 401));
 

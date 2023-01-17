@@ -10,6 +10,9 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
+    if (!email && password)
+      return next(CreateError("please fill all feilds"), 401);
+
     // check if the user exist
     const user = await User.findOne({
       email,
@@ -24,6 +27,7 @@ const login = async (req, res, next) => {
     //    get the role of that user to generate token accordenly
     const refresh_token = refreshToken(user);
     const acces_token = accesToken(user);
+
     switch (user.role) {
       case "user":
         await User.findByIdAndUpdate(user._id, {
@@ -37,7 +41,7 @@ const login = async (req, res, next) => {
         });
         res.status(200).json({
           success: true,
-          token: acces_token,
+          acces_token: acces_token,
           message: "Login successful by user",
           role: user.role,
         });
@@ -48,19 +52,18 @@ const login = async (req, res, next) => {
         await User.findByIdAndUpdate(user._id, {
           refresh_Token: refresh_token,
         });
-        res.cookie("refresh_token", refresh_token, {
+        await res.cookie("refresh_token", refresh_token, {
           httpOnly: true,
           maxAge: 7 * 24 * 60 * 60,
-          sameSite: "none",
           secure: false,
         });
+
         res.status(200).json({
           success: true,
           acces_token: acces_token,
-          refresh_token:refresh_token,
+          refresh_token: refresh_token,
           message: "Login successful by admin",
           role: user.role,
-
         });
 
         break;
