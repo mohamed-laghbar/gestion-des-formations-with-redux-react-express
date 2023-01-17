@@ -12,6 +12,7 @@ import Organisme from "./pages/admin/Organisme";
 import Formations from "./pages/admin/Formations";
 import Employees from "./pages/admin/Employees";
 import AddOrganisme from "./pages/admin/AddOrganisme";
+import P from "./pages/admin/p";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/formations" element={<Formations />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/addorgasnisme" element={<AddOrganisme />} />
+        <Route path="/private" element={<P />} />
         </Route>
 
         {/* User Routes */}

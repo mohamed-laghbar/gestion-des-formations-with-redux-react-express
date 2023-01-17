@@ -22,7 +22,7 @@ const AddOrganisme = () => {
         withCredentials: true,
       }
     );
-    navigate(-1);
+    navigate('/organismes');
   };
 
   return (

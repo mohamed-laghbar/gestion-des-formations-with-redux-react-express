@@ -19,7 +19,7 @@ export const addOrganisme = async (req, res, next) => {
     const organisme = await Organisme.create(newOrganisme);
     if (!organisme)
       return next(CreateError("Problem in adding new organisme", 502));
-    res.status(201).json("new organisme was added ");
+    return res.status(201).json("new organisme was added ");
   } catch (error) {
     next(error);
   }

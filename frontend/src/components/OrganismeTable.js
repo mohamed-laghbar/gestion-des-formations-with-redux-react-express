@@ -6,7 +6,7 @@ import { BiPlusCircle } from "react-icons/bi";
 export default function OrgansimeTable() {
   let [organisme, setOrganisme] = useState([]);
 
-  useEffect(() => {
+  useEffect( () => {
     axios
       .get("http://localhost:1337/api/organismes")
       .then((res) => {

@@ -8,17 +8,17 @@ async function isValidRefreshToken(token) {
   const secret = process.env.REFRESH_SECRET;
 
   try {
-    if (!token) throw new Error("refresh token is required");
 
     return jwt.verify(token, secret, async (err, decode) => {
       if (err) {
         // refresh token is expired
-        const payload = jwt_decode(token);
+        let payload = jwt_decode(token);
         const { id } = payload;
         const newUser = await newRefreshToken(id);
         if (!newUser) throw new Error("no user found with that id");
+
         const newAccesToken = accesToken(newUser);
-        const paylaod = jwt_decode(newAccesToken);
+         paylaod = jwt_decode(newAccesToken);
 
         console.log("Acces token and refresh token both expired");
 
@@ -37,10 +37,10 @@ async function isValidRefreshToken(token) {
       const user = await User.findOne({
         _id: id,
       });
+
       const newAccesToken = accesToken(user);
       payload = jwt_decode(newAccesToken);
 
-      console.log("acces token expired but the refresh token is valid");
       const data = {
         payload,
         newAccesToken,
@@ -48,7 +48,7 @@ async function isValidRefreshToken(token) {
       return data;
     });
   } catch (error) {
-    throw new Error(error);
+    return false;
   }
 }
 

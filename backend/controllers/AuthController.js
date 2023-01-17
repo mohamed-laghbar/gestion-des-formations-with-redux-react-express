@@ -56,9 +56,11 @@ const login = async (req, res, next) => {
         });
         res.status(200).json({
           success: true,
-          token: acces_token,
+          acces_token: acces_token,
+          refresh_token:refresh_token,
           message: "Login successful by admin",
           role: user.role,
+
         });
 
         break;

@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { ValidateEmail, validatePassword } from "../../utils/validation";
+import Cookies from "js-cookie";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { setAuth } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -37,19 +38,18 @@ const Login = () => {
         }
       );
       // login true
-     const role = data?.role;
-     const token = data?.token;
-     
-        setAuth({token,role})
-        localStorage.setItem('role',role)
-        localStorage.setItem('token',token)
+      const role = data?.role;
+      const acces_token = data?.acces_token;
+      console.log(data);
 
-        console.log(role);
-        navigate(`/${role}`)
+      setAuth({ acces_token, role });
+      localStorage.setItem("role", role);
+      localStorage.setItem("token", acces_token);
 
-     console.log(role,token);
-     toast.success(data.message, {
-       position: toast.POSITION.TOP_CENTER,
+      navigate(`/${role}`);
+
+      toast.success(data.message, {
+        position: toast.POSITION.TOP_CENTER,
       });
     } catch (error) {
       toast.error(error?.response?.data?.message, {
